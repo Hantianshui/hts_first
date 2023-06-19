@@ -18,15 +18,15 @@ clear;
 %%%需要测试的程序内容 %%%  
 
 C = 3e8;
-sigmaA_line = 1:0.001:2;
-% sigmaA = sigmaA_line(min(find(normpdf(71,1,sigmaA_line)>0)));
 theta_gate = 3;
 pb = 0.94;
-sigmaA = sigmaA_line(min(find(normcdf(theta_gate,0,sigmaA_line)<=pb)));
+sigmaA_line = 1:0.000001:10;
+sigmaA = sigmaA_line(min(find(normpdf(71,1,sigmaA_line)>0)));
+% sigmaA = sigmaA_line(min(find(normcdf(theta_gate,0,sigmaA_line)<=pb)));
 fre_delta = 10;
 case_move = 2; % 目标运动形式选择：1，平动；2，进动
-fre_num = 1; % 频点选择，1-201 9G-11G 0.01G为步长
-while(1)
+fre_num = 201; % 频点选择，1-201 9G-11G 0.01G为步长
+% while(1)
 tic 
 %% 静态数据库WD数据读取
 load('WD.mat','echo','ConfigWData');  % 复数数据，201*1801矩阵，横向是各个角度，纵向是各个频点
@@ -291,10 +291,10 @@ ylabel('角度(°)');
 toc  
 disp(['频率为',num2str(frq),'GHz时，运行时间为：',num2str(toc)]);
 
-if fre_num < 192
-    fre_num = fre_num + fre_delta;
-else
-    break;
-end
+% if fre_num < 192
+%     fre_num = fre_num + fre_delta;
+% else
+%     break;
+% end
 
-end
+% end
